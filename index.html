@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skysun — Weather App</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+<div class="stars" id="stars"></div>
+ 
+<div class="app">
+  <header>
+    <div class="logo">
+      Skysun <span>/ weather</span>
+    </div>
+  </header>
+ 
+  <div class="search-wrapper">
+    <input class="search-input" id="cityInput" type="text"
+           placeholder="Search city..." autocomplete="off"
+           onkeydown="if(event.key==='Enter') fetchWeather()">
+    <button class="geo-btn" onclick="getLocation()" title="Use my location">📍</button>
+    <button class="search-btn" onclick="fetchWeather()">Search</button>
+  </div>
+ 
+  <div class="demo-chips" id="demoChips">
+    <span style="font-size:0.7rem; color:var(--muted); align-self:center;">Try:</span>
+    <div class="demo-chip" onclick="loadDemo('Copenhagen')">Copenhagen</div>
+    <div class="demo-chip" onclick="loadDemo('Kyiv')">Kyiv</div>
+    <div class="demo-chip" onclick="loadDemo('Tokyo')">Tokyo</div>
+    <div class="demo-chip" onclick="loadDemo('New York')">New York</div>
+    <div class="demo-chip" onclick="loadDemo('Dubai')">Dubai</div>
+  </div>
+ 
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="loading" id="loading"><span class="loading-dots">Loading weather</span></div>
+ 
+  <div id="weatherContent" style="display:none; display:flex; flex-direction:column; gap:1.25rem;">
+ 
+    <div class="main-card">
+      <div class="city-name" id="cityDisplay">—</div>
+      <span class="country" id="countryDisplay">—</span>
+      <span class="weather-icon" id="mainIcon">🌤</span>
+      <div class="temperature" id="tempDisplay">—<sup>°C</sup></div>
+      <div class="description" id="descDisplay">—</div>
+      <div class="feels-like" id="feelsDisplay">Feels like — °C</div>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-label">Humidity</div>
+          <div class="stat-value" id="humidityVal">—<span class="stat-unit">%</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Wind</div>
+          <div class="stat-value" id="windVal">—<span class="stat-unit"> m/s</span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Pressure</div>
+          <div class="stat-value" id="pressureVal">—<span class="stat-unit"> hPa</span></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="forecast-section">
+      <div class="section-title">Hourly forecast</div>
+      <div class="hourly-scroll" id="hourlyRow"></div>
+    </div>
+ 
+    <div class="forecast-section">
+      <div class="section-title">7-day forecast</div>
+      <div class="daily-list" id="dailyList"></div>
+    </div>
+ 
+    <div class="detail-grid">
+      <div class="detail-card">
+        <div class="detail-card-label">🌅 Sunrise / Sunset</div>
+        <div class="detail-card-value" id="sunriseVal">—</div>
+        <div class="sun-bar"><div class="sun-progress" id="sunProgress" style="width:0%"></div></div>
+        <div class="sun-times">
+          <span id="sunriseTime">—</span>
+          <span id="sunsetTime">—</span>
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-label">☁️ Cloud Cover</div>
+        <div class="detail-card-value" id="cloudsVal">—%</div>
+        <div class="detail-card-sub" id="cloudsDesc">—</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-label">👁 Visibility</div>
+        <div class="detail-card-value" id="visibilityVal">— km</div>
+        <div class="detail-card-sub" id="visibilityDesc">—</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-label">☀️ UV Index</div>
+        <div class="detail-card-value" id="uvVal">—</div>
+        <div class="uv-bar" id="uvBar"></div>
+        <div class="detail-card-sub" id="uvDesc">—</div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <div class="api-note" id="apiNote">
+    <strong>🔑 Add your API key to enable live data</strong><br>
+    This app uses <a href="https://openweathermap.org/api" style="color:#fbbf24;">OpenWeatherMap API</a> (free tier).<br>
+    1. Register at openweathermap.org → get a free API key<br>
+    2. Replace <code>YOUR_API_KEY</code> in the JS code<br>
+    3. Demo cities above show how the UI looks with real data!
+  </div>
+ 
+  <footer>
+    <a href="https://openweathermap.org" target="_blank">Data source</a>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

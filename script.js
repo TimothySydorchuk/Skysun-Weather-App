@@ -258,22 +258,5 @@ function loadDemo(city) {
   fetchWeather(city);
 }
  
-function getLocation() {
-  if (!navigator.geolocation) { showError('Geolocation not supported'); return; }
-  if (API_KEY === 'YOUR_API_KEY') {
-    showError('Add your API key first to use geolocation. Try a demo city!');
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(async pos => {
-    try {
-      const {latitude: lat, longitude: lon} = pos.coords;
-      const res = await fetch(`${BASE}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
-      const data = await res.json();
-      document.getElementById('cityInput').value = data.name;
-      fetchWeather();
-    } catch(e) { showError('Could not get location weather'); }
-  }, () => showError('Location access denied'));
-}
- 
 initStars();
 fetchWeather('Copenhagen');

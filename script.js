@@ -189,7 +189,6 @@ function renderWeather(d) {
  
   setTheme(d.temp);
   document.getElementById('weatherContent').style.display = 'flex';
-  document.getElementById('apiNote').style.display = 'none';
 }
  
 function showError(msg) {
